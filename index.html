@@ -5,9 +5,13 @@
     <script src="lib/react.min.js"></script>
     <script src="lib/JSXTransformer.js"></script>
     <script src="lib/jquery.min.js"></script>
+    <link href="lib/skeleton.min.css" rel="stylesheet">
+    <link href="css/movies.css" rel="stylesheet">
   </head>
   <body>
-    <div id="content"></div>
+    <div class="container">
+      <div id="content" class="twelve columns"></div>
+    </div>
     <script type="text/jsx">
       var MovieBox = React.createClass({
         getInitialState: function() {
@@ -29,7 +33,7 @@
         render: function() {
           return (
             <div className="movieBox">
-              <h1>Movie List!</h1>
+              <h1>OMDB Movie Search!</h1>
               <MovieSearchForm onQuerySubmit={this.handleQuerySubmit} />
               <MovieList data={this.state.data} />
             </div>
@@ -51,8 +55,7 @@
         render: function() {
           return (
             <form className="movieSearchForm" onSubmit={this.handleSubmit} >
-              <input type="text" placeholder="Movie title" ref="query" />
-              <input type="submit" value="Post" />
+              <input type="text" placeholder="Search for a movie title" ref="query" />
             </form>
           );
         }
@@ -95,7 +98,7 @@
           return (
             <li className="movie">
               <h2 className="movieTitle">{this.props.title}</h2>
-              <p className="movieReleaseDate">{this.props.releaseDate}</p>
+              <h3 className="movieReleaseDate">{this.props.releaseDate}</h3>
               <p className="movieDescription" onClick={this.populateDescription}>{this.state.description}</p>
             </li>
           );
