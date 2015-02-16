@@ -9,28 +9,47 @@
   <body>
     <div id="content"></div>
     <script type="text/jsx">
-      var data = [
-        {title: 'Movie A', description: 'A is awesome'},
-        {title: 'Movie B', description: 'B is awesome'},
-        {title: 'Movie C', description: 'C is awesome'}
-      ];
-
       var MovieBox = React.createClass({
+        getInitialState: function() {
+          return {data: []};
+        },
+        handleQuerySubmit: function(query) {
+          $.ajax({
+            url: this.props.url + query,
+            dataType: 'json',
+            type: 'GET',
+            success: function(data) {
+              this.setState({data: data.Search});
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.url, status, err.toString());
+            }.bind(this)
+          });
+        },
         render: function() {
           return (
             <div className="movieBox">
               <h1>Movie List!</h1>
-              <MovieSearchForm />
-              <MovieList data={this.props.data} />
+              <MovieSearchForm onQuerySubmit={this.handleQuerySubmit} />
+              <MovieList data={this.state.data} />
             </div>
           );
         }
       });
 
       var MovieSearchForm = React.createClass({
+        handleSubmit: function(e) {
+          e.preventDefault();
+          var query = this.refs.query.getDOMNode().value.trim();
+          if (!query) {
+            return;
+          }
+          this.props.onQuerySubmit(query);
+          this.refs.query.getDOMNode().value = '';
+        },
         render: function() {
           return (
-            <form className="movieSearchForm">
+            <form className="movieSearchForm" onSubmit={this.handleSubmit} >
               <input type="text" placeholder="Movie title" ref="query" />
               <input type="submit" value="Post" />
             </form>
@@ -42,7 +61,7 @@
         render: function() {
           var movieNodes = this.props.data.map(function(movie) {
             return (
-              <Movie title={movie.title} description={movie.description} />
+              <Movie title={movie.Title} releaseDate={movie.Year} />
             );
           });
 
@@ -56,10 +75,11 @@
 
       var Movie = React.createClass({
         render: function() {
+          console.log(this.props);
           return (
             <li className="movie">
               <h2 className="movieTitle">{this.props.title}</h2>
-              <p className="movieDescription">{this.props.description}</p>
+              <p className="movieReleaseDate">Released on: {this.props.releaseDate}</p>
             </li>
           );
         }
@@ -67,7 +87,7 @@
 
       // render
       React.render(
-        <MovieBox data={data} />,
+        <MovieBox url="http://www.omdbapi.com/?r=json&type=movie&s=" />,
         document.getElementById('content')
       );
     </script>
