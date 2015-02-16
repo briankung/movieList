@@ -36,11 +36,9 @@
         render: function() {
           return (
             <ul className="movieList">
-              <Movie />
-              <Movie />
-              <Movie />
-              <Movie />
-              <Movie />
+              <Movie title="A" description="A is awesome" />
+              <Movie title="B" description="B is awesome" />
+              <Movie title="C" description="C is awesome" />
             </ul>
           );
         }
@@ -50,8 +48,8 @@
         render: function() {
           return (
             <li className="movie">
-              <h2>Movie Title</h2>
-              <p>Movie description</p>
+              <h2 className="movieTitle">{this.props.title}</h2>
+              <p className="movieDescription">{this.props.description}</p>
             </li>
           );
         }
