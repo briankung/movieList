@@ -9,9 +9,57 @@
   <body>
     <div id="content"></div>
     <script type="text/jsx">
+      var MovieBox = React.createClass({
+        render: function() {
+          return (
+            <div className="movieBox">
+              <h1>Movie List!</h1>
+              <MovieList />
+              <MovieSearchForm />
+            </div>
+          );
+        }
+      });
+
+      var MovieSearchForm = React.createClass({
+        render: function() {
+          return (
+            <form className="movieSearchForm">
+              <input type="text" placeholder="Movie title" ref="query" />
+              <input type="submit" value="Post" />
+            </form>
+          );
+        }
+      });
+
+      var MovieList = React.createClass({
+        render: function() {
+          return (
+            <ul className="movieList">
+              <Movie />
+              <Movie />
+              <Movie />
+              <Movie />
+              <Movie />
+            </ul>
+          );
+        }
+      });
+
+      var Movie = React.createClass({
+        render: function() {
+          return (
+            <li className="movie">
+              <h2>Movie Title</h2>
+              <p>Movie description</p>
+            </li>
+          );
+        }
+      });
+
       // render
       React.render(
-        <h1>Movie List!</h1>,
+        <MovieBox />,
         document.getElementById('content')
       );
     </script>
