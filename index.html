@@ -65,7 +65,7 @@
         render: function() {
           var movieNodes = this.props.data.map(function(movie) {
             return (
-              <Movie title={movie.Title} releaseDate={movie.Year} imdbID={movie.imdbID} />
+              <Movie title={movie.Title} releaseDate={movie.Year} key={movie.imdbID} imdbID={movie.imdbID} />
             );
           });
 
