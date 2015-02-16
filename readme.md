@@ -8,7 +8,7 @@ All the dependencies are included in `lib`:
 - [React.js](https://facebook.github.io/react/) & JSX Transformer
 - [jQuery](https://jquery.com) for AJAX
 
-Just open `index.html` in your favorite browser and search to your heart's content.
+Just clone the repository, open `index.html` in your favorite browser, and search to your heart's content.
 
 There is a bug where movie titles change, but the details don't. To duplicate:
 
