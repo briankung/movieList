@@ -4,9 +4,9 @@ This is a simple React app that lets you search Open Movie Database for movie ti
 
 All the dependencies are included in `lib`:
 
-- Skeleton.css
-- React.js & JSX Transformer
-- jQuery for AJAX
+- [Skeleton.css](http://getskeleton.com/)
+- [React.js](https://facebook.github.io/react/) & JSX Transformer
+- [jQuery](https://jquery.com) for AJAX
 
 Just open `index.html` in your favorite browser and search to your heart's content.
 
