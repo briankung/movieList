@@ -62,7 +62,7 @@
         render: function() {
           var movieNodes = this.props.data.map(function(movie) {
             return (
-              <Movie title={movie.Title} releaseDate={movie.Year} />
+              <Movie title={movie.Title} releaseDate={movie.Year} imdbID={movie.imdbID} />
             );
           });
 
@@ -75,11 +75,28 @@
       });
 
       var Movie = React.createClass({
+        getInitialState: function() {
+          return {description: 'Click for description'};
+        },
+        populateDescription: function() {
+          $.ajax({
+            url: "http://www.omdbapi.com/?plot=full&r=json&i=" + this.props.imdbID,
+            dataType: 'json',
+            type: 'GET',
+            success: function(data) {
+              this.setState({description: data.Plot});
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.url, status, err.toString());
+            }.bind(this)
+          });
+        },
         render: function() {
           return (
             <li className="movie">
               <h2 className="movieTitle">{this.props.title}</h2>
               <p className="movieReleaseDate">{this.props.releaseDate}</p>
+              <p className="movieDescription" onClick={this.populateDescription}>{this.state.description}</p>
             </li>
           );
         }
