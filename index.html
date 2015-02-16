@@ -41,7 +41,8 @@
         handleSubmit: function(e) {
           e.preventDefault();
           var query = this.refs.query.getDOMNode().value.trim();
-          if (!query) {
+          if (!query || query.length < 2) {
+            alert('Please enter a search query at least two characters long.');
             return;
           }
           this.props.onQuerySubmit(query);
