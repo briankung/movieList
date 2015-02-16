@@ -75,11 +75,10 @@
 
       var Movie = React.createClass({
         render: function() {
-          console.log(this.props);
           return (
             <li className="movie">
               <h2 className="movieTitle">{this.props.title}</h2>
-              <p className="movieReleaseDate">Released on: {this.props.releaseDate}</p>
+              <p className="movieReleaseDate">{this.props.releaseDate}</p>
             </li>
           );
         }
