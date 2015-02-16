@@ -9,13 +9,19 @@
   <body>
     <div id="content"></div>
     <script type="text/jsx">
+      var data = [
+        {title: 'Movie A', description: 'A is awesome'},
+        {title: 'Movie B', description: 'B is awesome'},
+        {title: 'Movie C', description: 'C is awesome'}
+      ];
+
       var MovieBox = React.createClass({
         render: function() {
           return (
             <div className="movieBox">
               <h1>Movie List!</h1>
               <MovieSearchForm />
-              <MovieList />
+              <MovieList data={this.props.data} />
             </div>
           );
         }
@@ -34,11 +40,15 @@
 
       var MovieList = React.createClass({
         render: function() {
+          var movieNodes = this.props.data.map(function(movie) {
+            return (
+              <Movie title={movie.title} description={movie.description} />
+            );
+          });
+
           return (
             <ul className="movieList">
-              <Movie title="A" description="A is awesome" />
-              <Movie title="B" description="B is awesome" />
-              <Movie title="C" description="C is awesome" />
+              {movieNodes}
             </ul>
           );
         }
@@ -57,7 +67,7 @@
 
       // render
       React.render(
-        <MovieBox />,
+        <MovieBox data={data} />,
         document.getElementById('content')
       );
     </script>
